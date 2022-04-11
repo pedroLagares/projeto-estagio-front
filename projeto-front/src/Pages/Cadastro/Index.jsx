@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import api from '../../service/api.js'
 import { LayoutComponents } from '../../components/LayoutComponentes/Index';
-import Alert from '../../components/Alerta'
+import Alerta from '../../components/Alerta.jsx';
+import 'bootstrap/dist/css/bootstrap.css';
 
 export const Cadastro = () => {
     const [email, setEmail] = useState("");
@@ -14,6 +15,8 @@ export const Cadastro = () => {
         const model = { name: name, email: email, password: password };
 
         await api.post("/auth/register", model).then(response => {
+            Alerta("Registro salvo com sucesso");
+            window.location.href="/login";
             console.log(response);
         });
 
@@ -51,8 +54,6 @@ export const Cadastro = () => {
                     <Link className="txt2" to="/login">Acessar com Email e Senha.</Link>
                 </div>
             </form>
-
-            <Alert className="alert"/>
         </LayoutComponents>
 
     );

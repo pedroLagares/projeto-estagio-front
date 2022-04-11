@@ -1,10 +1,12 @@
-import { Alert } from "reactstrap";
-import 'bootstrap/dist/css/bootstrap.css';
+import React from 'react';
+import { UncontrolledAlert } from 'reactstrap';
 
-function Alerta() {
-    return(
-        <Alert> Registro salvo com sucesso! </Alert>
-    );
+function Alerta(props) {
+  return (
+    <UncontrolledAlert color="info">
+      {props.chidren}
+    </UncontrolledAlert>
+  );
 }
 
-export default Alerta
+export default Alerta;
