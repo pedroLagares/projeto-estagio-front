@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import api from '../../service/api.js'
-import { LayoutComponents } from '../../components/LayoutComponentes/Index';
-import Alerta from '../../components/Alerta.jsx';
+import api from '../service/api.js'
+import { LayoutComponents } from '../components/LayoutComponents';
+import Alerta from '../components/AlertaComponent.jsx';
 import 'bootstrap/dist/css/bootstrap.css';
 
 export const Cadastro = () => {
@@ -10,7 +10,7 @@ export const Cadastro = () => {
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
 
-    async function Registrar(e) {
+    async function registrar(e) {
         e.preventDefault();
         const model = { name: name, email: email, password: password };
 
@@ -46,7 +46,7 @@ export const Cadastro = () => {
                 </div>
 
                 <div className="container-login-form-btn">
-                    <button className="login-form-btn" onClick={Registrar} >Cadastrar</button>
+                    <button className="login-form-btn" onClick={registrar} >Cadastrar</button>
                 </div>
 
                 <div className="text-center">

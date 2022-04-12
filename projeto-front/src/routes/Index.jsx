@@ -1,7 +1,7 @@
 import { BrowserRouter  as Router, Routes, Route } from "react-router-dom";
-import { Cadastro } from "../Pages/Cadastro/Index";
-import { Login } from "../Pages/Login/Index";
-import { Playlist } from "../Pages/Playlist/Index";
+import { Cadastro } from "../Pages/CadastroPage";
+import { Login } from "../Pages/LoginPage";
+import { Playlist } from "../Pages/PlaylistPage";
 
 export const AppRouter = () => {
     return(

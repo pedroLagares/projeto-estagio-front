@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import api from '../../service/api.js'
-import Musics from './musics.jsx';
+import api from '../service/api.js'
+import Musics from '../components/MusicsComponent.jsx';
 
 export const Playlist = () => {
     const [name, setName] = useState();
     const [url, setUrl] = useState();
 
-    async function Adicionar(e) {
+    async function adicionar(e) {
         e.preventDefault();
         const music = { name: name, url: url}
 
@@ -24,14 +24,12 @@ export const Playlist = () => {
                         <form className="playlist-form">
                             <div className="wrap-input">
                                 <input type="text" placeholder='name' value={name} onChange={p => setName(p.target.value)}/>
-                                {/* <span className="focus-input" data-placeholder="Name"></span> */}
                             </div>
                             <div className="wrap-input">
                                 <input type="text" placeholder='url' value={url} onChange={p => setUrl(p.target.value)}/>
-                                {/* <span className="focus-input" data-placeholder="url"></span> */}
                             </div>
                             <div className="container-login-form-btn">
-                                <button className="login-form-btn" onClick={Adicionar}>Adicionar Musica</button>
+                                <button className="login-form-btn" onClick={adicionar}>Adicionar Musica</button>
                             </div>
                         </form>
                     </div>

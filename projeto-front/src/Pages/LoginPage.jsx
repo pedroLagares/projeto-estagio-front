@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import api from '../../service/api.js'
-import { LayoutComponents } from '../../components/LayoutComponentes/Index';
-import Alerta from '../../components/Alerta.jsx';
+import api from '../service/api.js'
+import { LayoutComponents } from '../components/LayoutComponents';
+import Alerta from '../components/AlertaComponent.jsx';
 import { useNavigate } from 'react-router-dom';
 import { UncontrolledAlert } from 'reactstrap';
 
@@ -11,7 +11,7 @@ export const Login = () => {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
-    async function Logar(e) {
+    async function logar(e) {
         e.preventDefault();
         const model = { email: email, password: password };     
 
@@ -42,7 +42,7 @@ export const Login = () => {
                 </div>
 
                 <div className="container-login-form-btn">
-                    <button className="login-form-btn" onClick={Logar}>Login</button>
+                    <button className="login-form-btn" onClick={logar}>Login</button>
                 </div>
 
                 <div className="text-center">
