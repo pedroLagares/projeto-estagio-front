@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import api from '../service/api.js'
-import Musics from '../components/MusicsComponent.jsx';
+import Musics from '../components/MusicsComponent';
 
 export const Playlist = () => {
     const [name, setName] = useState();
@@ -34,7 +34,7 @@ export const Playlist = () => {
                         </form>
                     </div>
 
-                    <div className="list-musics">
+                    <div >
                         <Musics/>
                     </div>
             </div>

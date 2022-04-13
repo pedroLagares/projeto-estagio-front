@@ -108,13 +108,6 @@ body{
     width: 100%;
 }
 
-.list-musics{
-    background-color: #babbbd;
-    width: 650px;
-    margin-top: 39px;
-    border-radius: 10px;
-}
-
 .input {
     width: 100%;
     font-size: 15px;
@@ -320,5 +313,32 @@ body{
     width: 100px;
     margin: 0 auto;
     flex-direction: row;
+    max-width: 100px;
+    align-items: center;
     display: flex;
+}
+
+.list-group {
+    margin-top: 52px;
+    /* text-align: center; */
+    justify-content: center;
+    width: 626px;
+    border-radius: 10px;
+}
+
+.list-group-item {
+    background-color: #babbbd;
+    flex-direction: row;
+    display: flex;
+}
+
+.music-content {
+    align-items: center;
+    margin: 20px 60px;
+    max-width: 350px;
+}
+
+.url {
+    text-decoration: none; 
+    overflow-wrap: break-word ;
 }

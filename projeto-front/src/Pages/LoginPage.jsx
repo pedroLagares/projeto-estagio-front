@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import api from '../service/api.js'
 import { LayoutComponents } from '../components/LayoutComponents';
-import Alerta from '../components/AlertaComponent.jsx';
+import Alerta from '../components/AlertaComponent';
 import { useNavigate } from 'react-router-dom';
 import { UncontrolledAlert } from 'reactstrap';
 
@@ -11,15 +11,33 @@ export const Login = () => {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
-    async function logar(e) {
-        e.preventDefault();
-        const model = { email: email, password: password };     
+    useEffect(() => {
+        const token = localStorage.getItem('token');
 
-        await api.post("/auth/login", model).then(response => {
+        if (token) {
+            api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`;
+            setAuthenticated(true);
+        }
+        setLoading(false)
+    })
+
+    async function logar(e) {
+        try {
+            e.preventDefault();
+            const model = { email: email, password: password };   
+            const {data: {token}} = await api.post("/auth/login", model)
+            localStorage.setItem('token', JSON.stringify(token));
+            api.defaults.headers.Authorization = `Bearer ${token}`;
             navigate("/playlist");
-        }).catch(res => {
-            Alerta(res.response.data.error);
-        });
+        } catch (err) {
+            console.log(err);
+        }
+        // await api.post("/auth/login", model).then(response => {
+        //     console.log(response.token, response.id, response.headers)
+        //     navigate("/playlist");
+        // }).catch(res => {
+        //     Alerta(res.response.data.error);
+        // });
 
     };
 
