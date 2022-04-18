@@ -1,44 +1,20 @@
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import api from '../service/api.js'
+import { useState } from 'react';
 import { LayoutComponents } from '../components/LayoutComponents';
-import Alerta from '../components/AlertaComponent';
 import { useNavigate } from 'react-router-dom';
 import { UncontrolledAlert } from 'reactstrap';
+import { useDispatch } from 'react-redux'
+import { authLogin } from '../store/fechActions'
 
 export const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-
-        if (token) {
-            api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`;
-            setAuthenticated(true);
-        }
-        setLoading(false)
-    })
+    const dispatch = useDispatch();
 
     async function logar(e) {
-        try {
-            e.preventDefault();
-            const model = { email: email, password: password };   
-            const {data: {token}} = await api.post("/auth/login", model)
-            localStorage.setItem('token', JSON.stringify(token));
-            api.defaults.headers.Authorization = `Bearer ${token}`;
-            navigate("/playlist");
-        } catch (err) {
-            console.log(err);
-        }
-        // await api.post("/auth/login", model).then(response => {
-        //     console.log(response.token, response.id, response.headers)
-        //     navigate("/playlist");
-        // }).catch(res => {
-        //     Alerta(res.response.data.error);
-        // });
-
+        e.preventDefault();
+        const user = { email: email, password: password };   
+        dispatch(authLogin(user));
     };
 
     const hasVal = (val) => val !== "" ? 'has-val input' : 'input';
@@ -46,7 +22,7 @@ export const Login = () => {
     return (
         <LayoutComponents>
             <form className="login-form">
-
+                    
                 <span className="login-form-title">Faça seu login</span>
 
                 <div className="wrap-input">
@@ -67,9 +43,6 @@ export const Login = () => {
                     <span className="txt1">Não possui conta?</span>
                     <Link className="txt2" to="/cadastro">Cadastrar</Link>
                 </div>
-                <UncontrolledAlert color="info">
-                    Registro salvo com sucesso!
-                </UncontrolledAlert>
 
             </form>
         </LayoutComponents>

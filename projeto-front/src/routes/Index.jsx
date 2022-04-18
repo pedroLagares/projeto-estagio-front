@@ -1,27 +1,26 @@
-import { BrowserRouter  as Router, Routes, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter  as Router, Routes, Route, Outlet, Navigate } from "react-router-dom";
 import { Cadastro } from "../Pages/CadastroPage";
-import { Login } from "../Pages/LoginPage";''
+import { Login } from "../Pages/LoginPage";
 import { Playlist } from "../Pages/PlaylistPage";
 import { Component } from "react";
+import { useSelector } from 'react-redux';
 
-function PrivateRoute({component: Component, ...rest}) {
-    return (
-        <Route {...rest} render={props => (
-            false ? (<Component {...props}/> : (<Redirect to={{ pathname: }}))
-        )} />
-    )
+const PrivateRoute = () => {
+    const { Authenticated } = useSelector((state) => state.auth); 
+
+    return Authenticated ? <Outlet /> : <Navigate to="/login" />;
 }
 
 export const AppRouter = () => {
     return(
         <Router>
-            <AuthProvider>
-                <Routes>
-                    <Route path="/login" exact element={<Login/>} />
-                    <Route path="/cadastro" exact element={<Cadastro/>} />
-                    <Route path="/playlist" exact element={<Playlist/>} />
-                </Routes>
-            </AuthProvider>
+            <Routes>
+                <Route path="/login" exact element={<Login/>} />
+                <Route path="/cadastro" exact element={<Cadastro/>} />
+                <Route path="/playlist" exact element={<PrivateRoute/>}>
+                    <Route path="/playlist" exact element={<Playlist/>}/>
+                </Route>
+            </Routes>
         </Router>
     );
 }

@@ -6,10 +6,15 @@ import { FaTrashAlt, FaEdit } from 'react-icons/fa';
 
 function Musics() {
     const [musics, setMusics] = useState([]);
+    const token = localStorage.getItem("token");
 
     useEffect(() => {
         (async () => {
-            const response = await api.get('/playlist/listar');
+            const response = await api.get('/playlist/listar', {
+                headers: {
+                    'x-access-token': token,
+                    'Content-Type': 'application/json'
+                }});
             setMusics(response.data.musics)    
         })();
       }, [])

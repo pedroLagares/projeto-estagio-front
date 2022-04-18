@@ -81,8 +81,9 @@ body{
 
 .playlist-form-title {
     display: block;
-    font-size: 50px;
+    font-size: 70px;
     color: #b721ff;
+    font-family: 'Pacifico', cursive;
     line-height: 1.2;
     text-align: center;
     margin-bottom: 50px;
@@ -341,4 +342,12 @@ body{
 .url {
     text-decoration: none; 
     overflow-wrap: break-word ;
+}
+
+.btn-logout {
+    color: #b721ff;
+    background: #333;
+    font-size: 60px;
+    position: absolute;
+    right: 10px;	
 }
