@@ -8,13 +8,13 @@ import logoutService from '../service/logout.Service'
 export const Playlist = () => {
     const [name, setName] = useState();
     const [url, setUrl] = useState();
-    const { Authenticated } = useSelector(state => state.auth);
+    const { authenticated } = useSelector(state => state.auth);
     const { user } = useSelector(state => state.auth);
     const dispatch = useDispatch();
     
 
     async function logout() {
-        Authenticated && dispatch(logoutService())
+        authenticated && dispatch(logoutService())
     }
 
     async function adicionar(e) {
@@ -25,7 +25,7 @@ export const Playlist = () => {
             headers: {
                 'x-access-token': token,
                 'Content-Type': 'application/json'
-            }}).then(document.location.reload(true))
+            }})
             .catch(error => {
                 alert(error.response.data.error);
             });

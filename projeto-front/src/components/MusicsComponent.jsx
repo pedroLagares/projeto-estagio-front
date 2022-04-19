@@ -17,7 +17,7 @@ function Musics() {
                 }});
             setMusics(response.data.musics)    
         })();
-      }, [])
+      }, [musics]);
 
     async function excluir(id) {
         await api.delete('/playlist/deletar/' + id);

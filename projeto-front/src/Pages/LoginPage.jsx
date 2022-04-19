@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { LayoutComponents } from '../components/LayoutComponents';
 import { useNavigate } from 'react-router-dom';
-import { UncontrolledAlert } from 'reactstrap';
 import { useDispatch } from 'react-redux'
 import { authLogin } from '../store/fechActions'
 
@@ -10,11 +9,12 @@ export const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     async function logar(e) {
         e.preventDefault();
         const user = { email: email, password: password };   
-        dispatch(authLogin(user));
+        dispatch(authLogin(user)).then(() => navigate('/playlist'));
     };
 
     const hasVal = (val) => val !== "" ? 'has-val input' : 'input';

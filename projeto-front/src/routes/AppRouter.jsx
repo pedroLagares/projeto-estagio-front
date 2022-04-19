@@ -6,9 +6,9 @@ import { Component } from "react";
 import { useSelector } from 'react-redux';
 
 const PrivateRoute = () => {
-    const { Authenticated } = useSelector((state) => state.auth); 
+    const { authenticated } = useSelector((state) => state.auth); 
 
-    return Authenticated ? <Outlet /> : <Navigate to="/login" />;
+    return authenticated ? <Outlet /> : <Navigate to="/login" />;
 }
 
 export const AppRouter = () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppRouter } from './routes/Index';
+import { AppRouter } from './routes/AppRouter';
 import "./assets/global.css"
 
 
