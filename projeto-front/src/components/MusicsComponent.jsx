@@ -1,23 +1,17 @@
 import React, { useState } from "react";
 import api from "../service/api";
 import { useEffect } from 'react';
-import { Container } from "reactstrap";
+import { useSelector, useDispatch } from "react-redux";
 import { FaTrashAlt, FaEdit } from 'react-icons/fa';
+import { listarMusicas } from '../store/fechActions'
 
 function Musics() {
-    const [musics, setMusics] = useState([]);
-    const token = localStorage.getItem("token");
+    const musics = useSelector(state => state.musics)
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        (async () => {
-            const response = await api.get('/playlist/listar', {
-                headers: {
-                    'x-access-token': token,
-                    'Content-Type': 'application/json'
-                }});
-            setMusics(response.data.musics)    
-        })();
-      }, [musics]);
+        dispatch(listarMusicas()) 
+      }, [musics,dispatch]);
 
     async function excluir(id) {
         await api.delete('/playlist/deletar/' + id);

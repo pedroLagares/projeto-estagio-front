@@ -10,6 +10,7 @@ export const Playlist = () => {
     const [url, setUrl] = useState();
     const { authenticated } = useSelector(state => state.auth);
     const { user } = useSelector(state => state.auth);
+    const { musics } = useSelector(state => state.musics);
     const dispatch = useDispatch();
     
 

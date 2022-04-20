@@ -1,5 +1,6 @@
 import api from '../service/api'
 import { login } from './ducks/auth';
+import { addMusics } from './ducks/musics'
 
 export const authLogin = (user) => {
     return dispatch => {
@@ -18,13 +19,10 @@ export const listarMusicas = () => {
     return dispatch => {
         return api.get('/playlist/listar', {
             headers: {
-                'x-access-token': token,
+                'x-access-token': localStorage.getItem('token'),
                 'Content-Type': 'application/json'
-            }});
-            return dispatch(login(res.data.user.name));
-        }
-        ).catch(error => {
-            alert(error.response.data.error);
-        });
+            }})
+        .then(res => dispatch(addMusics(res.data)))
+        .catch(error => alert(error.response.data.error));
     }
 }
