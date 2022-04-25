@@ -1,6 +1,6 @@
 import api from '../service/api'
 import { login } from './ducks/auth';
-import { addMusics } from './ducks/musics'
+import { addMusics, addMusic, updateMusic } from './ducks/musics';
 
 export const authLogin = (user) => {
     return dispatch => {
@@ -12,6 +12,35 @@ export const authLogin = (user) => {
         ).catch(error => {
             alert(error.response.data.error);
         });
+    }
+}
+
+export const adicionarMusica = (music) => {
+    return dispatch => {
+        api.post("/playlist/adicionar", music, {
+            headers: {
+                'x-access-token': localStorage.getItem('token'),
+                'Content-Type': 'application/json'
+            }})
+            .then(res => dispatch(addMusic(res.data)))
+            .catch(error => {
+                alert(error.response.data.error);
+            }); 
+    }
+}
+
+export const editarMusica = (id, music) => {
+    return dispatch => {
+        return api.post('/playlist/editar/' + id, music, {
+            headers: {
+                'x-access-token': localStorage.getItem('token'),
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => {
+            console.log(res);
+            return dispatch(updateMusic(res?.data))})
+        .catch(error => alert(error.response.data.error));
     }
 }
 

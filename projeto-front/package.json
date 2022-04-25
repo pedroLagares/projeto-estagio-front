@@ -27,6 +27,8 @@
     "reactjs-alert": "^2.1.0",
     "reactstrap": "^9.0.1",
     "redux": "^4.1.2",
+    "sas": "^3.0.4",
+    "sass": "^1.50.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

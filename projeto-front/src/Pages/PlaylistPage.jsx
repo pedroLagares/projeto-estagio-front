@@ -4,6 +4,7 @@ import api from '../service/api.js'
 import Musics from '../components/MusicsComponent';
 import { FaSignOutAlt } from 'react-icons/fa';
 import logoutService from '../service/logout.Service'
+import { adicionarMusica } from '../store/fechActions'
 
 export const Playlist = () => {
     const [name, setName] = useState();
@@ -18,19 +19,10 @@ export const Playlist = () => {
         authenticated && dispatch(logoutService())
     }
 
-    async function adicionar(e) {
-        e.preventDefault();
-        const token = localStorage.getItem("token");
+    async function adicionar() {
         const music = { name: name, url: url};
-        await api.post("/playlist/adicionar", music, {
-            headers: {
-                'x-access-token': token,
-                'Content-Type': 'application/json'
-            }})
-            .catch(error => {
-                alert(error.response.data.error);
-            });
-        };
+        dispatch(adicionarMusica(music));
+    } 
 
     return (
         <div className='fullpage'>

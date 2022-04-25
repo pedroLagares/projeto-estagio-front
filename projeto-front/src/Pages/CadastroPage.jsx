@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import api from '../service/api.js'
 import { LayoutComponents } from '../components/LayoutComponents';
-import Alerta from '../components/AlertaComponent.jsx';
 import 'bootstrap/dist/css/bootstrap.css';
 
 export const Cadastro = () => {
@@ -15,7 +14,6 @@ export const Cadastro = () => {
         const model = { name: name, email: email, password: password };
 
         await api.post("/auth/register", model).then(response => {
-            Alerta("Registro salvo com sucesso");
             window.location.href="/login";
             console.log(response);
         });
