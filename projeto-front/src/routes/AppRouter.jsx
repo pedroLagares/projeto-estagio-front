@@ -2,7 +2,6 @@ import { BrowserRouter  as Router, Routes, Route, Outlet, Navigate } from "react
 import { Cadastro } from "../Pages/CadastroPage";
 import { Login } from "../Pages/LoginPage";
 import { Playlist } from "../Pages/PlaylistPage";
-import { Component } from "react";
 import { useSelector } from 'react-redux';
 
 const PrivateRoute = () => {

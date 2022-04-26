@@ -1,4 +1,4 @@
-import { createAction, createReducer } from "@reduxjs/toolkit";
+import { createAction, createReducer, current } from "@reduxjs/toolkit";
 
 const INITIAL_STATE = [];
 
@@ -9,13 +9,16 @@ export const addMusics = createAction('ADD_MUSICS');
 export default createReducer(INITIAL_STATE, {
     [addMusic.type]: (state, action) => [...state, action.payload],
     [updateMusic.type]: (state, action) => {
-            const musicIndex = state.findIndex(m => m.id === action.payload.id);
-            if ( musicIndex < 0 ) {
-                return [...state, action.payload];
-            }
-            else {
-                return state[musicIndex] = action.payload; 
-            }
+        const currentState = current(state);
+        const musicIndex = currentState.findIndex(m => m.id === action.payload.id);
+        if ( musicIndex < 0 ) {
+            return [...currentState, action.payload];
+        }
+        else {
+            const _state = [...currentState];
+            _state[musicIndex] = action.payload;
+            return _state;
+        }
     },
     [addMusics.type]: (state, action) => [...action.payload]
 })
